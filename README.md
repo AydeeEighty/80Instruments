@@ -22,6 +22,8 @@ Klok - a standard clock with multiply and divide by 2,4,8 and 16.
 
 Kaos - a random module that when triggered, outputs a random voltage based on switch. Outputs (0-1V, 0-5V, 0-10V).
 
+![AngryArp](https://github.com/AydeeEighty/80Instruments/blob/master/images/angryarp.png?raw=true)
+
 AngryArp - a 16-step arpeggiator with -2 to +2 octave change.
 
 ![Sin](https://github.com/AydeeEighty/80Instruments/blob/master/images/sin.png?raw=true)
