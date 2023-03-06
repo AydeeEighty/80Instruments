@@ -133,6 +133,9 @@ struct paramnote : ParamQuantity {
 	else if (getValue()>11 && getValue()<=12.000){
 		return "C";
 	}
+	else {
+		return "N";
+	}
 	}
 };
 
