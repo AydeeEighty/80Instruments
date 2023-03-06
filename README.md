@@ -12,7 +12,7 @@ Maniac2 - a semitonal 16-step sequencer with random or sequential steps. Outputs
 
 ![Maniac3](https://github.com/AydeeEighty/80Instruments/blob/master/images/maniac3.png?raw=true)
 
-Maniac3 - a semitonal 16-step sequencer with random/sequential steps.  Octave is set with the octave trim pot.  Also has random note drift per step.
+Maniac3 - a semitonal 16-step sequencer with random/sequential steps.  Octave control and random drift per step.
 
 ![Klok](https://github.com/AydeeEighty/80Instruments/blob/master/images/klok.png?raw=true)
 
