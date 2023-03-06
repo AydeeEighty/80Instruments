@@ -43,11 +43,14 @@ struct Klok : Module {
 	dsp::BooleanTrigger resetButtonTrigger;
 	dsp::PulseGenerator resetPulse;
 	bool runit=false;
-	
+	bool initialHit=true;
+
 	float counter,counterDiv2,counterDiv4,counterDiv8,counterDiv16; 
 	float counterMult2,counterMult4,counterMult8,counterMult16;
 	float period,periodDiv2,periodDiv4,periodDiv8,periodDiv16;
 	float periodMult2,periodMult4,periodMult8,periodMult16;
+	float out,outDiv2,outDiv4,outDiv8,outDiv16;
+	float outMult2,outMult4,outMult8,outMult16;
 
 
 	Klok() {
@@ -64,58 +67,70 @@ struct Klok : Module {
 		configOutput(DIV4_OUTPUT, "");
 		configOutput(DIV8_OUTPUT, "");
 		configOutput(DIV16_OUTPUT, "");
-		counter = period = 0.f;
-		counterDiv2= periodDiv2 =0.f;
-		counterDiv4= periodDiv4 =0.f;
-		counterDiv8= periodDiv8 =0.f;
-		counterDiv16= periodDiv16 =0.f;
-		counterMult2 = periodMult2 =0.f;
-		counterMult4 = periodMult4 =0.f;
-		counterMult8 = periodMult8 =0.f;
-		counterMult16 = periodMult16 =0.f;
+		counter = 0.f;
+		period = 0.f;
+		counterDiv2= 0.f;
+		periodDiv2 =0.f;
+		counterDiv4= 0.f;
+		periodDiv4 =0.f;
+		counterDiv8= 0.f;
+		periodDiv8 =0.f;
+		counterDiv16= 0.f;
+		periodDiv16 =0.f;
+		counterMult2 = 0.f;
+		periodMult2 =0.f;
+		counterMult4 = 0.f;
+		periodMult4 =0.f;
+		counterMult8 = 0.f;
+		periodMult8 =-0.f;
+		counterMult16 = 0.f; 
+		periodMult16 =0.f;
 	}
 
 	void process(const ProcessArgs& args) override {
 
 		if (runButtonTrigger.process(params[RUN_PARAM].getValue())) {
 			runit^= true;
-			
-		}
+			}
 		if (resetButtonTrigger.process(params[RESET_PARAM].getValue())){
-			counter = period = 0.f;
-			counterDiv2= periodDiv2 =0.f;
-			counterDiv4= periodDiv4 =0.f;
-			counterDiv8= periodDiv8 =0.f;
-			counterDiv16= periodDiv16 =0.f;
-			counterMult2 = periodMult2 =0.f;
-			counterMult4 = periodMult4 =0.f;
-			counterMult8 = periodMult8 =0.f;
-			counterMult16 = periodMult16 =0.f;
+			counter = 0.f;
+			period = 0.f;
+			counterDiv2= 0.f;
+			periodDiv2 =0.f;
+			counterDiv4= 0.f;
+			periodDiv4 =0.f;
+			counterDiv8= 0.f;
+			periodDiv8 =0.f;
+			counterDiv16= 0.f;
+			periodDiv16 =0.f;
+			counterMult2 = 0.f;
+			periodMult2 =0.f;
+			counterMult4 = 0.f;
+			periodMult4 =0.f;
+			counterMult8 = 0.f;
+			periodMult8 =0.f;
+			counterMult16 = 0.f; 
+			periodMult16 =0.f;
 			resetPulse.trigger(TRIG_TIME);
-			
+			initialHit=true;
 		}
 	bool resetGate = resetPulse.process(args.sampleTime);
 	
 	
 	if (runit){
-		float out = pgen.process(args.sampleTime);
-		float outDiv2 = pgenDiv2.process(args.sampleTime);
-		float outDiv4 = pgenDiv4.process(args.sampleTime);
-		float outDiv8 = pgenDiv8.process(args.sampleTime);
-		float outDiv16 = pgenDiv16.process(args.sampleTime);
-		float outMult2 = pgenMult2.process(args.sampleTime);
-		float outMult4 = pgenMult4.process(args.sampleTime);
-		float outMult8 = pgenMult8.process(args.sampleTime);
-		float outMult16 = pgenMult16.process(args.sampleTime);
-		outputs[MAIN_OUTPUT].setVoltage(10.f*out);
-		outputs[DIV2_OUTPUT].setVoltage(10.f*outDiv2);
-		outputs[DIV4_OUTPUT].setVoltage(10.f*outDiv4);
-		outputs[DIV8_OUTPUT].setVoltage(10.f*outDiv8);
-		outputs[DIV16_OUTPUT].setVoltage(10.f*outDiv16);
-		outputs[_2X_OUTPUT].setVoltage(10.f*outMult2);
-		outputs[_4X_OUTPUT].setVoltage(10.f*outMult4);
-		outputs[_8X_OUTPUT].setVoltage(10.f*outMult8);
-		outputs[_16X_OUTPUT].setVoltage(10.f*outMult16);
+		if(initialHit){
+
+			outputs[MAIN_OUTPUT].setVoltage(10.f);
+			outputs[DIV2_OUTPUT].setVoltage(10.f);
+			outputs[DIV4_OUTPUT].setVoltage(10.f);
+			outputs[DIV8_OUTPUT].setVoltage(10.f);
+			outputs[DIV16_OUTPUT].setVoltage(10.f);
+			outputs[_2X_OUTPUT].setVoltage(10.f);
+			outputs[_4X_OUTPUT].setVoltage(10.f);
+			outputs[_8X_OUTPUT].setVoltage(10.f);
+			outputs[_16X_OUTPUT].setVoltage(10.f);
+			initialHit=false;
+		}	
 		
 		float BPM = params[BPM_PARAM].getValue();
 		period = 60.f * args.sampleRate/BPM;
@@ -172,6 +187,7 @@ struct Klok : Module {
 			pgenMult16.trigger(TRIG_TIME);
 			counterMult16-= periodMult16;
 		}
+		
 		counter++;
 		counterDiv2++;
 		counterDiv4++;
@@ -181,7 +197,25 @@ struct Klok : Module {
 		counterMult4++;
 		counterMult8++;
 		counterMult16++;
-
+		
+		out = pgen.process(args.sampleTime);
+		outDiv2 = pgenDiv2.process(args.sampleTime);
+		outDiv4 = pgenDiv4.process(args.sampleTime);
+		outDiv8 = pgenDiv8.process(args.sampleTime);
+		outDiv16 = pgenDiv16.process(args.sampleTime);
+		outMult2 = pgenMult2.process(args.sampleTime);
+		outMult4 = pgenMult4.process(args.sampleTime);
+		outMult8 = pgenMult8.process(args.sampleTime);
+		outMult16 = pgenMult16.process(args.sampleTime);
+		outputs[MAIN_OUTPUT].setVoltage(10.f*out);
+		outputs[DIV2_OUTPUT].setVoltage(10.f*outDiv2);
+		outputs[DIV4_OUTPUT].setVoltage(10.f*outDiv4);
+		outputs[DIV8_OUTPUT].setVoltage(10.f*outDiv8);
+		outputs[DIV16_OUTPUT].setVoltage(10.f*outDiv16);
+		outputs[_2X_OUTPUT].setVoltage(10.f*outMult2);
+		outputs[_4X_OUTPUT].setVoltage(10.f*outMult4);
+		outputs[_8X_OUTPUT].setVoltage(10.f*outMult8);
+		outputs[_16X_OUTPUT].setVoltage(10.f*outMult16);
 
 		
 		lights[RUN_LIGHT].setBrightness(1.0);
