@@ -1,0 +1,60 @@
+{
+  "slug": "80Instruments",
+  "name": "80Instruments",
+  "version": "2.0.0",
+  "license": "proprietary",
+  "brand": "80Instruments",
+  "author": "Aydee",
+  "authorEmail": "",
+  "authorUrl": "",
+  "pluginUrl": "",
+  "manualUrl": "",
+  "sourceUrl": "",
+  "donateUrl": "",
+  "changelogUrl": "",
+  "modules": [
+    {
+      "slug": "Maniac",
+      "name": "Maniac",
+      "description": "",
+      "tags": []
+    },
+    {
+      "slug": "Sin",
+      "name": "Sin",
+      "description": "",
+      "tags": []
+    },
+    {
+      "slug": "Kaos",
+      "name": "Kaos",
+      "description": "",
+      "tags": []
+    },
+    {
+      "slug": "Klok",
+      "name": "Klok",
+      "description": "",
+      "tags": []
+    },
+    {
+      "slug": "Maniac2",
+      "name": "Maniac2",
+      "description": "",
+      "tags": []
+    },
+    {
+      "slug": "AngryArp",
+      "name": "AngryArp",
+      "description": "",
+      "tags": []
+    },
+    {
+      "slug": "Maniac3",
+      "name": "Maniac3",
+      "description": "",
+      "tags": []
+    }
+    
+  ]
+}
