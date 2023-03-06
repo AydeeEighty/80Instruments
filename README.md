@@ -2,7 +2,7 @@
 VCV Rack plugin package
 
 ## These are the modules included with 80Instruments:
-
+![Maniac](https://raw.githubusercontent.com/AydeeEighty/80Instruments/7672e75d628a95d4d92dce423daa6b5a55957ca5/images/maniac.png)
 #### Maniac1 - a standard 16-step sequencer with random or sequential steps.  Outputs 0-1V.
 #### Maniac2 - a semitonal 16-step sequencer with random or sequential steps. Outputs 0-1V based on semitones.  No quantizer is needed.
 #### Maniac3 - a semitonal 16-step sequencer with random/sequential steps.  Octave is set with the octave trim pot.  Also has random note drift per step.
