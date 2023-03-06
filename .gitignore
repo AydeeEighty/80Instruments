@@ -1,4 +1,5 @@
 /build
+/dist/80Instruments
 /*.so
 /*.dylib
 /*.dll
