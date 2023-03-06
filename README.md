@@ -1,4 +1,4 @@
-### 80Instruments
+# 80Instruments
 VCV Rack plugin package
 
 ## These are the modules included with 80Instruments:
