@@ -1,3 +1,5 @@
+//This code is originally taken from the VCV Rack Plugin Development Tutorial
+
 #include "plugin.hpp"
 
 
@@ -17,7 +19,6 @@ struct Sin : Module {
 		OUTPUTS_LEN
 	};
 	enum LightId {
-		BLINK_LIGHT,
 		LIGHTS_LEN
 	};
 
@@ -49,11 +50,6 @@ struct Sin : Module {
 		
 		outputs[SINE_OUTPUT].setVoltage(5.f * sine);
 
-		// Blink light at 1Hz
-		blinkPhase += args.sampleTime;
-		if (blinkPhase >= 1.f)
-			blinkPhase -= 1.f;
-		lights[BLINK_LIGHT].setBrightness(blinkPhase < 0.5f ? 1.f : 0.f);
 	}
 };
 
@@ -74,7 +70,7 @@ struct SinWidget : ModuleWidget {
 
 		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(5.222, 106.356)), module, Sin::SINE_OUTPUT));
 
-		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(5.222, 12.533)), module, Sin::BLINK_LIGHT));
+		
 	}
 };
 
