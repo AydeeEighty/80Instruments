@@ -16,6 +16,8 @@ extern Model* modelKlok;
 extern Model* modelManiac2;
 extern Model* modelAngryArp;
 extern Model* modelManiac3;
+extern Model* modelSaw;
+
 
 
 
