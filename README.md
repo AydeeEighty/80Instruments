@@ -33,3 +33,8 @@ Sin - a basic sine oscillator.  It is a reskinned version of the test module fro
 ![Saw](https://github.com/AydeeEighty/80Instruments/blob/master/images/saw.png?raw=true)
 
 Saw - a basic saw oscillator
+
+![Sqr](https://github.com/AydeeEighty/80Instruments/blob/master/images/sqr.png?raw=true)
+
+Sqr - a basic square oscillator
+
