@@ -1,6 +1,6 @@
 #include "plugin.hpp"
 
-float phase = 0.f;
+float ph = 0.f;
 float saw=0.f;
 
 struct Saw : Module {
@@ -34,11 +34,11 @@ struct Saw : Module {
 		pitch = clamp(pitch, -4.f, 4.f);
 		float freq = dsp::FREQ_C4 * std::pow(2.f, pitch);
 		// Accumulate the phase
-		phase += freq * deltaTime;
-		if (phase >= 1.0f)
-			phase -= 1.0f;
+		ph += freq * deltaTime;
+		if (ph >= 1.0f)
+			ph -= 1.0f;
 		float pinput = 0.5f;
-        saw = cos(exp(pinput * M_PI * phase));
+        saw = cos(exp(pinput * M_PI * ph));
 		outputs[SAW_OUTPUT].setVoltage(5.f * saw);
 	}
 };

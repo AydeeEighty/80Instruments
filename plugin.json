@@ -54,7 +54,18 @@
       "name": "Maniac3",
       "description": "",
       "tags": []
+    },
+    {
+      "slug": "Saw",
+      "name": "Saw",
+      "description": "",
+      "tags": []
+    },
+    {
+      "slug": "Sqr",
+      "name": "Sqr",
+      "description": "",
+      "tags": []
     }
-    
   ]
 }
