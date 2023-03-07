@@ -30,3 +30,6 @@ AngryArp - a 16-step arpeggiator with -2 to +2 octave change.
 
 Sin - a basic sine oscillator.  It is a reskinned version of the test module from the [VCV Plugin Development](https://vcvrack.com/manual/PluginDevelopmentTutorial) tutorial.
 
+![Saw](https://github.com/AydeeEighty/80Instruments/blob/master/images/saw.png?raw=true)
+
+Saw - a basic saw oscillator
