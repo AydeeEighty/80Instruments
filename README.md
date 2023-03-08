@@ -38,3 +38,8 @@ Saw - a basic saw oscillator
 
 Sqr - a basic square oscillator
 
+![Volta](https://github.com/AydeeEighty/80Instruments/blob/master/images/volta.png?raw=true)
+
+Volta - a basic 2-channel voltage meter .. 0-10V
+
+
