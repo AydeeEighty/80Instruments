@@ -85,6 +85,7 @@ struct Klok : Module {
 		periodMult8 =-0.f;
 		counterMult16 = 0.f; 
 		periodMult16 =0.f;
+		initialHit=true;
 	}
 
 	void process(const ProcessArgs& args) override {
@@ -119,16 +120,33 @@ struct Klok : Module {
 	
 	if (runit){
 		if(initialHit){
-
-			outputs[MAIN_OUTPUT].setVoltage(10.f);
-			outputs[DIV2_OUTPUT].setVoltage(10.f);
-			outputs[DIV4_OUTPUT].setVoltage(10.f);
-			outputs[DIV8_OUTPUT].setVoltage(10.f);
-			outputs[DIV16_OUTPUT].setVoltage(10.f);
-			outputs[_2X_OUTPUT].setVoltage(10.f);
-			outputs[_4X_OUTPUT].setVoltage(10.f);
-			outputs[_8X_OUTPUT].setVoltage(10.f);
-			outputs[_16X_OUTPUT].setVoltage(10.f);
+			pgen.trigger(TRIG_TIME);
+			pgenDiv2.trigger(TRIG_TIME);
+			pgenDiv4.trigger(TRIG_TIME);
+			pgenDiv8.trigger(TRIG_TIME);
+			pgenDiv16.trigger(TRIG_TIME);
+			pgenMult2.trigger(TRIG_TIME);
+			pgenMult4.trigger(TRIG_TIME);
+			pgenMult8.trigger(TRIG_TIME);
+			pgenMult16.trigger(TRIG_TIME);
+			out = pgen.process(args.sampleTime);
+			outDiv2 = pgenDiv2.process(args.sampleTime);
+			outDiv4 = pgenDiv4.process(args.sampleTime);
+			outDiv8 = pgenDiv8.process(args.sampleTime);
+			outDiv16 = pgenDiv16.process(args.sampleTime);
+			outMult2 = pgenMult2.process(args.sampleTime);
+			outMult4 = pgenMult4.process(args.sampleTime);
+			outMult8 = pgenMult8.process(args.sampleTime);
+			outMult16 = pgenMult16.process(args.sampleTime);
+			outputs[MAIN_OUTPUT].setVoltage(10.f*out);
+			outputs[DIV2_OUTPUT].setVoltage(10.f*outDiv2);
+			outputs[DIV4_OUTPUT].setVoltage(10.f*outDiv4);
+			outputs[DIV8_OUTPUT].setVoltage(10.f*outDiv8);
+			outputs[DIV16_OUTPUT].setVoltage(10.f*outDiv16);
+			outputs[_2X_OUTPUT].setVoltage(10.f*outMult2);
+			outputs[_4X_OUTPUT].setVoltage(10.f*outMult4);
+			outputs[_8X_OUTPUT].setVoltage(10.f*outMult8);
+			outputs[_16X_OUTPUT].setVoltage(10.f*outMult16);
 			initialHit=false;
 		}	
 		

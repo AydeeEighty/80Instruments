@@ -85,11 +85,15 @@ struct Maniac3 : Module {
 	};
 
 	dsp::SchmittTrigger edgeDetector;
-	int stepNr=0;
+	int stepNr=-1;
 	float drift=0.0;
 	int driftInt=0;
 	float semitoneDrift=0.0;
     int randomDrift=0;
+	bool initialHit=true;
+	float octaveChange=0;
+	float octave=0;
+
 
 struct paramnote : ParamQuantity {
 	int semitone;
@@ -154,17 +158,34 @@ struct paramnote : ParamQuantity {
 		};
 		configParam(STEPS_PARAM, 1.0f, 16.0f, 16.0f, "Steps");
 		paramQuantities[STEPS_PARAM]->snapEnabled = true;
+		initialHit=true;
+		stepNr=-1;
 	}
 
 	void process(const ProcessArgs& args) override {
 
 	int pulses = (int)fmaxf(params[STEPS_PARAM].getValue(), 1.0f);
-	float octave = params[OCTAVE1_PARAM+stepNr].getValue();
-	float octaveChange = octave*12*0.08333;
+	if(initialHit){
+		 stepNr=-1;
+		initialHit=false;
+	}
+	
+	if (stepNr>0){
+		octave = params[OCTAVE1_PARAM+stepNr].getValue();
+		octaveChange = octave*12*0.08333;
+	}
+	else {
+		octave = params[OCTAVE1_PARAM].getValue();
+		octaveChange = octave*12*0.08333;	
+	}
 	if (params[SWITCH_PARAM].getValue()==0){
 	if (edgeDetector.process(inputs[IN_INPUT].getVoltage())) {
 			stepNr=(stepNr+1) % pulses;
-			drift=(params[DRIFT1_PARAM+stepNr].getValue());
+			if (stepNr>0){
+			drift=(params[DRIFT1_PARAM+stepNr].getValue());}
+			else {
+			drift=(params[DRIFT1_PARAM].getValue());
+			}
 			driftInt=static_cast<int>(drift);
 			if (driftInt!=0){
 			randomDrift = std::rand() % (driftInt*2) - driftInt;
@@ -193,15 +214,20 @@ struct paramnote : ParamQuantity {
 	}
 	if (inputs[RESET_INPUT].isConnected()){
 		if (inputs[RESET_INPUT].getVoltage() >0){
-			stepNr=0;
+			stepNr=-1;
 		}
 	}
 	for (int l=0; l<LIGHTS_LEN; l++){
 		lights[l].setSmoothBrightness (l==stepNr, 5e-6f);
 	}
 	
-
-	outputs [OUT_OUTPUT].setVoltage ((params[STEP1_PARAM+stepNr].getValue()/12)+semitoneDrift+octaveChange);
+	 if (stepNr>0){
+    outputs [OUT_OUTPUT].setVoltage ((params[STEP1_PARAM+stepNr].getValue()/12)+semitoneDrift+octaveChange);
+	}
+	else{
+	outputs [OUT_OUTPUT].setVoltage ((params[STEP1_PARAM].getValue()/12)+semitoneDrift+octaveChange);
+	}
+	
 
 
 

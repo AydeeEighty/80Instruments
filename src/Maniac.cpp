@@ -54,7 +54,9 @@ struct Maniac : Module {
 
 	
 	dsp::SchmittTrigger edgeDetector;
-	int stepNr=0;
+	int stepNr=-1;
+	bool initialHit=true;
+
 
 	Maniac() {
 		config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
@@ -64,10 +66,23 @@ struct Maniac : Module {
 		};
 		configParam(STEPS_PARAM, 1.0f, 16.0f, 16.0f, "Steps");
 		paramQuantities[STEPS_PARAM]->snapEnabled = true;
+		initialHit=true;
+		stepNr=-1;
 	}
 
 	void process(const ProcessArgs& args) override {
 	int pulses = (int)fmaxf(params[STEPS_PARAM].getValue(), 1.0f); 
+	if(initialHit){
+		 stepNr=-1;
+		initialHit=false;
+	
+	}
+	if (stepNr>0){
+    outputs [OUT_OUTPUT].setVoltage (params[stepNr].getValue());
+	}
+	else{
+	outputs [OUT_OUTPUT].setVoltage (params[0].getValue());
+	}
 	if (params[SWITCH_PARAM].getValue()==0){
 	if (edgeDetector.process(inputs[IN_INPUT].getVoltage())) {
 			stepNr=(stepNr+1) % pulses;
@@ -80,13 +95,14 @@ struct Maniac : Module {
 	}
 	if (inputs[RESET_INPUT].isConnected()){
 		if (inputs[RESET_INPUT].getVoltage() >0){
-			stepNr=0;
+			stepNr=-1;
+			initialHit=true;
 		}
 	}
 	for (int l=0; l<LIGHTS_LEN; l++){
 		lights[l].setSmoothBrightness (l==stepNr, 5e-6f);
 	}
-	outputs [OUT_OUTPUT].setVoltage (params[stepNr].getValue());
+	
 	
 	}
 };

@@ -53,9 +53,9 @@ struct Maniac2 : Module {
 	};
 
 	dsp::SchmittTrigger edgeDetector;
-	int stepNr=0;
+	int stepNr=-1;
 	std::string note;
-	float step1_value;
+	bool initialHit=true;
 	
 
 struct paramnote : ParamQuantity {
@@ -118,12 +118,26 @@ struct paramnote : ParamQuantity {
 		};
 		configParam(STEPS_PARAM, 1.0f, 16.0f, 16.0f, "Steps");
 		paramQuantities[STEPS_PARAM]->snapEnabled = true;
+		initialHit=true;
+		stepNr=-1;
 	}
 
 	void process(const ProcessArgs& args) override {
-    step1_value=params[STEP1_PARAM].getValue();
-    
+
+	
 	int pulses = (int)fmaxf(params[STEPS_PARAM].getValue(), 1.0f); 
+	if(initialHit){
+		 stepNr=-1;
+		initialHit=false;
+	
+	}
+    if (stepNr>0){
+    outputs [OUT_OUTPUT].setVoltage (params[stepNr].getValue()/12);
+	}
+	else{
+	outputs [OUT_OUTPUT].setVoltage (params[0].getValue()/12);
+	}
+	
 	if (params[SWITCH_PARAM].getValue()==0){
 	if (edgeDetector.process(inputs[IN_INPUT].getVoltage())) {
 			stepNr=(stepNr+1) % pulses;
@@ -136,7 +150,8 @@ struct paramnote : ParamQuantity {
 	}
 	if (inputs[RESET_INPUT].isConnected()){
 		if (inputs[RESET_INPUT].getVoltage() >0){
-			stepNr=0;
+			stepNr=-1;
+			initialHit=true;
 		}
 	}
 	for (int l=0; l<LIGHTS_LEN; l++){
@@ -144,10 +159,6 @@ struct paramnote : ParamQuantity {
 	}
 	
 
-    
-	
-	
-	outputs [OUT_OUTPUT].setVoltage (params[stepNr].getValue()/12);
 	}
 
 };
