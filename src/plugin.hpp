@@ -18,6 +18,8 @@ extern Model* modelAngryArp;
 extern Model* modelManiac3;
 extern Model* modelSaw;
 extern Model* modelSqr;
+extern Model* modelVolta;
+
 
 
 

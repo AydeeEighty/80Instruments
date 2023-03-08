@@ -66,6 +66,12 @@
       "name": "Sqr",
       "description": "",
       "tags": []
+    },
+    {
+      "slug": "Volta",
+      "name": "Volta",
+      "description": "",
+      "tags": []
     }
   ]
 }
