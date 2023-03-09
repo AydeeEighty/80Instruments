@@ -17,61 +17,89 @@
       "slug": "Maniac",
       "name": "Maniac",
       "description": "A simple 16 step sequencer",
-      "tags": ["Sequencer"]
+      "tags": [
+        "Sequencer"
+      ]
     },
     {
       "slug": "Sin",
       "name": "Sin",
       "description": "A simple sine oscillator",
-      "tags": ["Oscillator"]
+      "tags": [
+        "Oscillator"
+      ]
     },
     {
       "slug": "Kaos",
       "name": "Kaos",
       "description": "A random CV source",
-      "tags": ["Random"]
+      "tags": [
+        "Random"
+      ]
     },
     {
       "slug": "Klok",
       "name": "Klok",
       "description": "A simple clock",
-      "tags": ["Clock generator"]
+      "tags": [
+        "Clock generator"
+      ]
     },
     {
       "slug": "Maniac2",
       "name": "Maniac2",
       "description": "A simple semitonal sequencer",
-      "tags": ["Sequencer"]
+      "tags": [
+        "Sequencer"
+      ]
     },
     {
       "slug": "AngryArp",
       "name": "AngryArp",
       "description": "A sixteen step arpeggiator",
-      "tags": ["Arpeggiator"]
+      "tags": [
+        "Arpeggiator"
+      ]
     },
     {
       "slug": "Maniac3",
       "name": "Maniac3",
       "description": "A sixteen step sequencer with octave change and random drift per step",
-      "tags": ["Sequencer"]
+      "tags": [
+        "Sequencer"
+      ]
     },
     {
       "slug": "Saw",
       "name": "Saw",
       "description": "A simple saw oscillator",
-      "tags": ["Oscillator"]
+      "tags": [
+        "Oscillator"
+      ]
     },
     {
       "slug": "Sqr",
       "name": "Sqr",
       "description": "A simple square oscillator",
-      "tags": ["Oscillator"]
+      "tags": [
+        "Oscillator"
+      ]
     },
     {
       "slug": "Volta",
       "name": "Volta",
       "description": "A simple two channel voltage meter",
-      "tags": ["Visual"]
+      "tags": [
+        "Visual"
+      ]
+    },
+    {
+      "slug": "Blank",
+      "name": "Blank",
+      "description": "",
+      "tags": [
+        "Blank"
+      ]
     }
   ]
 }
