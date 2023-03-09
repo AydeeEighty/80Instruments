@@ -121,10 +121,10 @@ struct Klok : Module {
 	if (runit){
 		if(initialHit){
 			pgen.trigger(TRIG_TIME);
-			pgenDiv2.trigger(TRIG_TIME);
-			pgenDiv4.trigger(TRIG_TIME);
-			pgenDiv8.trigger(TRIG_TIME);
-			pgenDiv16.trigger(TRIG_TIME);
+			pgenDiv2.trigger(TRIG_TIME*2);
+			pgenDiv4.trigger(TRIG_TIME*4);
+			pgenDiv8.trigger(TRIG_TIME*8);
+			pgenDiv16.trigger(TRIG_TIME*16);
 			pgenMult2.trigger(TRIG_TIME/2);
 			pgenMult4.trigger(TRIG_TIME/4);
 			pgenMult8.trigger(TRIG_TIME/8);
@@ -168,22 +168,22 @@ struct Klok : Module {
 		}
 
 		if (counterDiv2>periodDiv2){
-			pgenDiv2.trigger(TRIG_TIME);
+			pgenDiv2.trigger(TRIG_TIME*2);
 			counterDiv2-= periodDiv2;
 		}
 
 		if (counterDiv4>periodDiv4){
-			pgenDiv4.trigger(TRIG_TIME);
+			pgenDiv4.trigger(TRIG_TIME*4);
 			counterDiv4-= periodDiv4;
 		}
 
 		if (counterDiv8>periodDiv8){
-			pgenDiv8.trigger(TRIG_TIME);
+			pgenDiv8.trigger(TRIG_TIME*8);
 			counterDiv8-= periodDiv8;
 		}
 
 		if (counterDiv16>periodDiv16){
-			pgenDiv16.trigger(TRIG_TIME);
+			pgenDiv16.trigger(TRIG_TIME*16);
 			counterDiv16-= periodDiv16;
 		}
 
