@@ -8,70 +8,70 @@
   "authorEmail": "eightyaydee@gmail.com",
   "authorUrl": "",
   "pluginUrl": "",
-  "manualUrl": "",
-  "sourceUrl": "",
+  "manualUrl": "https://github.com/AydeeEighty/80Instruments/blob/master/README.md",
+  "sourceUrl": "https://github.com/AydeeEighty/80Instruments",
   "donateUrl": "",
   "changelogUrl": "",
   "modules": [
     {
       "slug": "Maniac",
       "name": "Maniac",
-      "description": "",
-      "tags": []
+      "description": "A simple 16 step sequencer",
+      "tags": [Sequencer]
     },
     {
       "slug": "Sin",
       "name": "Sin",
-      "description": "",
-      "tags": []
+      "description": "A simple sine oscillator",
+      "tags": [Oscillator]
     },
     {
       "slug": "Kaos",
       "name": "Kaos",
-      "description": "",
-      "tags": []
+      "description": "A random CV source",
+      "tags": [Random]
     },
     {
       "slug": "Klok",
       "name": "Klok",
-      "description": "",
-      "tags": []
+      "description": "A simple clock",
+      "tags": [Clock generator]
     },
     {
       "slug": "Maniac2",
       "name": "Maniac2",
-      "description": "",
-      "tags": []
+      "description": "A simple semitonal sequencer",
+      "tags": [Sequencer]
     },
     {
       "slug": "AngryArp",
       "name": "AngryArp",
-      "description": "",
-      "tags": []
+      "description": "A sixteen step arpeggiator",
+      "tags": [Arpeggiator]
     },
     {
       "slug": "Maniac3",
       "name": "Maniac3",
-      "description": "",
-      "tags": []
+      "description": "A sixteen step sequencer with octave change and random drift per step",
+      "tags": [Sequencer]
     },
     {
       "slug": "Saw",
       "name": "Saw",
-      "description": "",
-      "tags": []
+      "description": "A simple saw oscillator",
+      "tags": [Oscillator]
     },
     {
       "slug": "Sqr",
       "name": "Sqr",
-      "description": "",
-      "tags": []
+      "description": "A simple square oscillator",
+      "tags": [Oscillator]
     },
     {
       "slug": "Volta",
       "name": "Volta",
-      "description": "",
-      "tags": []
+      "description": "A simple two channel voltage meter",
+      "tags": [Visual]
     }
   ]
 }
