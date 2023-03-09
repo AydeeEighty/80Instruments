@@ -17,61 +17,61 @@
       "slug": "Maniac",
       "name": "Maniac",
       "description": "A simple 16 step sequencer",
-      "tags": [Sequencer]
+      "tags": []
     },
     {
       "slug": "Sin",
       "name": "Sin",
       "description": "A simple sine oscillator",
-      "tags": [Oscillator]
+      "tags": []
     },
     {
       "slug": "Kaos",
       "name": "Kaos",
       "description": "A random CV source",
-      "tags": [Random]
+      "tags": []
     },
     {
       "slug": "Klok",
       "name": "Klok",
       "description": "A simple clock",
-      "tags": [Clock generator]
+      "tags": []
     },
     {
       "slug": "Maniac2",
       "name": "Maniac2",
       "description": "A simple semitonal sequencer",
-      "tags": [Sequencer]
+      "tags": []
     },
     {
       "slug": "AngryArp",
       "name": "AngryArp",
       "description": "A sixteen step arpeggiator",
-      "tags": [Arpeggiator]
+      "tags": []
     },
     {
       "slug": "Maniac3",
       "name": "Maniac3",
       "description": "A sixteen step sequencer with octave change and random drift per step",
-      "tags": [Sequencer]
+      "tags": []
     },
     {
       "slug": "Saw",
       "name": "Saw",
       "description": "A simple saw oscillator",
-      "tags": [Oscillator]
+      "tags": []
     },
     {
       "slug": "Sqr",
       "name": "Sqr",
       "description": "A simple square oscillator",
-      "tags": [Oscillator]
+      "tags": []
     },
     {
       "slug": "Volta",
       "name": "Volta",
       "description": "A simple two channel voltage meter",
-      "tags": [Visual]
+      "tags": []
     }
   ]
 }
