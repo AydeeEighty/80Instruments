@@ -146,18 +146,22 @@ struct paramnote : ParamQuantity {
 
 	Maniac3() {
 		config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
-		configSwitch(SWITCH_PARAM, 0.0f, 1.0f, 1.0f, "Mode", {"Seq.", "Random"});
+		configSwitch(SWITCH_PARAM, 0.0f, 1.0f, 0.0f, "Mode", {"Seq.", "Random"});
+		getParamQuantity(SWITCH_PARAM)->randomizeEnabled = false;
 		for (int i=0; i< Maniac3::LIGHTS_LEN; i++){
 			configParam<paramnote>(STEP1_PARAM+i,0.0f,12.0f,0.0f,"Note");
 			paramQuantities[STEP1_PARAM+i]->snapEnabled = true;
 			configParam(DRIFT1_PARAM+i,0.0f,12.0f,0.0f,"Drift");
+			getParamQuantity(DRIFT1_PARAM+i)->randomizeEnabled = false;
 			paramQuantities[DRIFT1_PARAM+i]->snapEnabled = true;
 			configParam(OCTAVE1_PARAM+i,-3.0f,3.0f,0.0f,"Octave Change");
+			getParamQuantity(OCTAVE1_PARAM+i)->randomizeEnabled = false;
 			paramQuantities[OCTAVE1_PARAM+i]->snapEnabled=true;
 			
 		};
 		configParam(STEPS_PARAM, 1.0f, 16.0f, 16.0f, "Steps");
 		paramQuantities[STEPS_PARAM]->snapEnabled = true;
+		getParamQuantity(STEPS_PARAM)->randomizeEnabled = false;
 		initialHit=true;
 		stepNr=-1;
 	}

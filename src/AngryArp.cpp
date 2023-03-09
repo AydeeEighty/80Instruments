@@ -63,6 +63,7 @@ struct AngryArp : Module {
 		};
 		configParam(STEPS_PARAM, 1.0f, 16.0f, 16.0f, "Steps");
 		paramQuantities[STEPS_PARAM]->snapEnabled = true;
+		getParamQuantity(STEPS_PARAM)->randomizeEnabled = false;
 		configInput(GATE_INPUT, "Gate");
 		configInput(VOCT_INPUT, "V/Oct");
 		configInput(CLOCK_INPUT, "Clock");
