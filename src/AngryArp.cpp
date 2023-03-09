@@ -74,7 +74,7 @@ struct AngryArp : Module {
 
 	void process(const ProcessArgs& args) override {
 		float pitch = inputs[VOCT_INPUT].getVoltage();
-		if (stepNr>=0){
+		if (stepNr>0){
 		octave =params[stepNr].getValue();
 		}
 		else{
