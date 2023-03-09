@@ -53,7 +53,8 @@ struct AngryArp : Module {
 		LIGHTS_LEN
 	};
 	dsp::SchmittTrigger edgeDetector;
-	int stepNr=0;
+	int stepNr=-1;
+	float octave;
 
 	AngryArp() {
 		config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
@@ -73,8 +74,12 @@ struct AngryArp : Module {
 
 	void process(const ProcessArgs& args) override {
 		float pitch = inputs[VOCT_INPUT].getVoltage();
-		
-		float octave =params[stepNr].getValue();
+		if (stepNr>=0){
+		octave =params[stepNr].getValue();
+		}
+		else{
+			octave =params[0].getValue();	
+		}
 		float arp = octave*12*0.08333 ;
 
 
@@ -87,7 +92,7 @@ struct AngryArp : Module {
 	      }
 		}
 		else{
-			stepNr=0;
+			stepNr=-1;
 			arp=0;
 			
 		}
