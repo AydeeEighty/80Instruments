@@ -1,5 +1,5 @@
 #include "plugin.hpp"
-float TRIG_TIME=1e-3f;
+float TRIG_TIME=0.25;
 
 struct Klok : Module {
 	enum ParamId {
@@ -125,10 +125,10 @@ struct Klok : Module {
 			pgenDiv4.trigger(TRIG_TIME);
 			pgenDiv8.trigger(TRIG_TIME);
 			pgenDiv16.trigger(TRIG_TIME);
-			pgenMult2.trigger(TRIG_TIME);
-			pgenMult4.trigger(TRIG_TIME);
-			pgenMult8.trigger(TRIG_TIME);
-			pgenMult16.trigger(TRIG_TIME);
+			pgenMult2.trigger(TRIG_TIME/2);
+			pgenMult4.trigger(TRIG_TIME/4);
+			pgenMult8.trigger(TRIG_TIME/8);
+			pgenMult16.trigger(TRIG_TIME/16);
 			out = pgen.process(args.sampleTime);
 			outDiv2 = pgenDiv2.process(args.sampleTime);
 			outDiv4 = pgenDiv4.process(args.sampleTime);
@@ -188,21 +188,21 @@ struct Klok : Module {
 		}
 
 		if (counterMult2>periodMult2){
-			pgenMult2.trigger(TRIG_TIME);
+			pgenMult2.trigger(TRIG_TIME/2);
 			counterMult2-= periodMult2;
 		}
 		if (counterMult4>periodMult4){
-			pgenMult4.trigger(TRIG_TIME);
+			pgenMult4.trigger(TRIG_TIME/4);
 			counterMult4-= periodMult4;
 		}
 
 		if (counterMult8>periodMult8){
-			pgenMult8.trigger(TRIG_TIME);
+			pgenMult8.trigger(TRIG_TIME/8);
 			counterMult8-= periodMult8;
 		}
 
 		if (counterMult16>periodMult16){
-			pgenMult16.trigger(TRIG_TIME);
+			pgenMult16.trigger(TRIG_TIME/16);
 			counterMult16-= periodMult16;
 		}
 		
