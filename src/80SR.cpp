@@ -112,6 +112,10 @@ struct _80SR : Module {
 		env = 0.0;
 	}
 	if (env>1){
+		env=1.0;
+	}
+	if (env<0)
+	{
 		env=0.0;
 	}
 	if (outputs[ENV_OUTPUT].isConnected()) {
