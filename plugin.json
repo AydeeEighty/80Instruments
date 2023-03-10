@@ -100,6 +100,14 @@
       "tags": [
         "Blank"
       ]
+    },
+    {
+      "slug": "80SR",
+      "name": "80SR",
+      "description": "A linear ADSR",
+      "tags": [
+        "Envelope generator"
+      ]
     }
   ]
 }
