@@ -80,6 +80,7 @@ struct _80SR : Module {
 	if (gateDetect.process(gate)) {
 		isAtk = true;
 		isRunning = true;
+		env=0.0;
 		
 	}
 
