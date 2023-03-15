@@ -45,13 +45,13 @@ struct Bullet : Module {
 	Bullet() {
 		config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
 		configParam(INITY_PARAM, -5.f, 5.f, 0.f, "Ground Position");
-		configParam(VEL_PARAM, 0.1f, 10.f, 5.f, "Velocity");
+		configParam(VEL_PARAM, 0.1f, 20.f, 5.f, "Velocity");
 		configParam(GRAV_PARAM, 0.5f, 9.f, 4.5f, "Gravity");
 		configParam(ANGLE_PARAM, 20.f, 90.f, 45.f, "Angle");
 		configButton(TRIG_PARAM,"Trigger");
 		configInput(TRIG_INPUT, "Trigger");
 		configOutput(Y_OUTPUT, "Trajectory");
-		configParam(DRAG_PARAM, 0.0001f, 0.01f, 0.005f, "Drag");
+		configParam(DRAG_PARAM, 0.0001f, 0.0005f, 0.00025f, "Drag");
 		configInput(VEL_INPUT, "Velocity CV");
 		configOutput(EOC_OUTPUT, "End of Cycle");
 		configOutput(INVY_OUTPUT, "Inverted Trajectory");
@@ -94,7 +94,7 @@ struct Bullet : Module {
 			
 		}
 		if (isRunning){
-			if (((yPos>5) | (yPos<yInitPos)) & (t>0)){
+			if (((yPos>10) | (yPos<yInitPos)) & (t>0)){
 				isRunning=false;
 				EOCPulse.trigger(1e-3f);
 				out = EOCPulse.process(args.sampleTime); 
