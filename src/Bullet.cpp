@@ -29,6 +29,7 @@ struct Bullet : Module {
 
 	dsp::PulseGenerator EOCPulse;
 	dsp::BooleanTrigger trigButtonTrigger;
+	dsp::SchmittTrigger edgeDetector;
 	bool isRunning = false;
 	float yInitPos=0.0;
 	float yPos=0.0;
@@ -39,6 +40,7 @@ struct Bullet : Module {
 	float PI=3.1415926;
 	float drag=0.5;
 	float out=0.0;
+	
 
 	Bullet() {
 		config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
@@ -57,7 +59,7 @@ struct Bullet : Module {
 
 	void process(const ProcessArgs& args) override {
 
-		if ((inputs[TRIG_INPUT].getVoltage()>0) & (!isRunning)){
+		if (((edgeDetector.process(inputs[TRIG_INPUT].getVoltage()))) & (!isRunning)){
 			yInitPos=params[INITY_PARAM].getValue();
 			if (inputs[VEL_INPUT].isConnected()){
 				velocity=inputs[VEL_INPUT].getVoltage();
@@ -72,6 +74,8 @@ struct Bullet : Module {
 			t=0.0;
 			yPos=yInitPos;
 			isRunning=true;
+			
+
 		}
 		if (trigButtonTrigger.process(params[TRIG_PARAM].getValue()) & !isRunning){
 			yInitPos=params[INITY_PARAM].getValue();
@@ -87,18 +91,19 @@ struct Bullet : Module {
 			t=0.0;
 			yPos=yInitPos;
 			isRunning=true;
+			
 		}
 		if (isRunning){
-			t+=args.sampleTime;
-			velocity = velocity - (drag)*t;
-			yPos=(velocity*t*std::sin( theta * PI / 180.0)-(0.5*grav*(t*t)))+yInitPos;
-			
-			if ((yPos>5) | (yPos<yInitPos)){
+			if (((yPos>5) | (yPos<yInitPos)) & (t>0)){
 				isRunning=false;
 				EOCPulse.trigger(1e-3f);
 				out = EOCPulse.process(args.sampleTime); 
 				outputs[EOC_OUTPUT].setVoltage(10.f*out);
 				}
+			t+=args.sampleTime;
+			velocity = velocity - (drag)*t;
+			yPos=(velocity*t*std::sin( theta * PI / 180.0)-(0.5*grav*(t*t)))+yInitPos;
+						
 			if (outputs[Y_OUTPUT].isConnected()) {
 			outputs[Y_OUTPUT].setVoltage(yPos);
 			 }
@@ -116,6 +121,7 @@ struct Bullet : Module {
 			outputs[Y_OUTPUT].setVoltage(yInitPos);
 			outputs[INVY_OUTPUT].setVoltage(yInitPos);
 			outputs[EOC_OUTPUT].setVoltage(0.0);
+			t=0.0;
 		}
 	
 
