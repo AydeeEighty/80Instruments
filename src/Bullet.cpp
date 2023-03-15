@@ -62,7 +62,7 @@ struct Bullet : Module {
 		if (((edgeDetector.process(inputs[TRIG_INPUT].getVoltage()))) & (!isRunning)){
 			yInitPos=params[INITY_PARAM].getValue();
 			if (inputs[VEL_INPUT].isConnected()){
-				velocity=inputs[VEL_INPUT].getVoltage();
+				velocity=(inputs[VEL_INPUT].getVoltage())*2;
 			}
 			else {
 				velocity=params[VEL_PARAM].getValue();
