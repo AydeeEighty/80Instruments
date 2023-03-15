@@ -108,6 +108,14 @@
       "tags": [
         "Envelope generator"
       ]
+    },
+    {
+      "slug": "Bullet",
+      "name": "Bullet",
+      "description": "A trajectory based CV source",
+      "tags": [
+        "Physical modeling"
+      ]
     }
   ]
 }

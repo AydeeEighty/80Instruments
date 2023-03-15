@@ -21,6 +21,7 @@ extern Model* modelSqr;
 extern Model* modelVolta;
 extern Model* modelBlank;
 extern Model* model_80SR;
+extern Model* modelBullet;
 
 
 
