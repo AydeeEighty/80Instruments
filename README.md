@@ -42,4 +42,13 @@ Sqr - a basic square oscillator
 
 Volta - a basic 2-channel voltage meter .. 0-10V
 
+![80SR](https://github.com/AydeeEighty/80Instruments/blob/master/images/80sr.png?raw=true)
+
+80SR - a linear ADSR
+
+![Bullet](https://github.com/AydeeEighty/80Instruments/blob/master/images/bullet.png?raw=true)
+
+Bullet - A physical modeling module that produces CV based on projectile motion.  Velocity, Gravity, Drag and Angle can be set. End-of-cycle, Gate out and both normal and inverted outputs are available.
+
+
 
