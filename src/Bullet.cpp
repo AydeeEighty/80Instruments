@@ -17,6 +17,7 @@ struct Bullet : Module {
 		INPUTS_LEN
 	};
 	enum OutputId {
+		GATE_OUTPUT,
 		EOC_OUTPUT,
 		INVY_OUTPUT,
 		Y_OUTPUT,
@@ -54,6 +55,8 @@ struct Bullet : Module {
 		configInput(VEL_INPUT, "Velocity CV");
 		configOutput(EOC_OUTPUT, "End of Cycle");
 		configOutput(INVY_OUTPUT, "Inverted Trajectory");
+		configOutput(GATE_OUTPUT, "Gate Out");
+		
 	}
 
 	void process(const ProcessArgs& args) override {
@@ -110,7 +113,7 @@ struct Bullet : Module {
 			outputs[INVY_OUTPUT].setVoltage(-1*yPos);
 			}
 			lights[TRIG_LIGHT].setBrightness(1.0);	
-			
+			outputs[GATE_OUTPUT].setVoltage(10.f);
 			
 
 		}
@@ -121,6 +124,7 @@ struct Bullet : Module {
 			outputs[INVY_OUTPUT].setVoltage(yInitPos);
 			outputs[EOC_OUTPUT].setVoltage(0.0);
 			t=0.0;
+			outputs[GATE_OUTPUT].setVoltage(0.0);
 		}
 	
 
@@ -148,6 +152,7 @@ struct BulletWidget : ModuleWidget {
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(8.412, 51.975)), module, Bullet::VEL_INPUT));
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(10.831, 109.748)), module, Bullet::TRIG_INPUT));
 
+		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(50.194, 93.468)), module, Bullet::GATE_OUTPUT));
 		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(23.93, 109.748)), module, Bullet::EOC_OUTPUT));
 		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(37.03, 109.748)), module, Bullet::INVY_OUTPUT));
 		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(50.129, 109.748)), module, Bullet::Y_OUTPUT));
