@@ -40,7 +40,6 @@ struct Bullet : Module {
 	float PI=3.1415926;
 	float drag=0.5;
 	float out=0.0;
-	
 
 	Bullet() {
 		config(PARAMS_LEN, INPUTS_LEN, OUTPUTS_LEN, LIGHTS_LEN);
@@ -147,11 +146,11 @@ struct BulletWidget : ModuleWidget {
 		addParam(createLightParamCentered<VCVLightButton<MediumSimpleLight<WhiteLight>>>(mm2px(Vec(30.48, 93.468)), module, Bullet::TRIG_PARAM, Bullet::TRIG_LIGHT));
 
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(8.412, 51.975)), module, Bullet::VEL_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(7.221, 109.748)), module, Bullet::TRIG_INPUT));
+		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(10.831, 109.748)), module, Bullet::TRIG_INPUT));
 
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(30.48, 110.145)), module, Bullet::EOC_OUTPUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(40.765, 110.343)), module, Bullet::INVY_OUTPUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(51.684, 110.343)), module, Bullet::Y_OUTPUT));
+		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(23.93, 109.748)), module, Bullet::EOC_OUTPUT));
+		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(37.03, 109.748)), module, Bullet::INVY_OUTPUT));
+		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(50.129, 109.748)), module, Bullet::Y_OUTPUT));
 	}
 };
 
