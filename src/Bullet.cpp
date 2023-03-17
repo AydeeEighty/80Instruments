@@ -61,8 +61,8 @@ struct Bullet : Module {
 
 	void process(const ProcessArgs& args) override {
 
-		//if (((edgeDetector.process(inputs[TRIG_INPUT].getVoltage()))) & (!isRunning)){
-		if ((inputs[TRIG_INPUT].getVoltage() > 0) & (!isRunning)){	
+		if (((edgeDetector.process(inputs[TRIG_INPUT].getVoltage()))) & (!isRunning)){
+		//if ((inputs[TRIG_INPUT].getVoltage() > 0) & (!isRunning)){	
 			yInitPos=params[INITY_PARAM].getValue();
 			if (inputs[VEL_INPUT].isConnected()){
 				velocity=(inputs[VEL_INPUT].getVoltage())*2;
@@ -70,13 +70,13 @@ struct Bullet : Module {
 			else {
 				velocity=params[VEL_PARAM].getValue();
 			}
-			
 			grav=params[GRAV_PARAM].getValue();
 			theta=params[ANGLE_PARAM].getValue();
 			drag=params[DRAG_PARAM].getValue();
 			t=0.0;
 			yPos=yInitPos;
 			isRunning=true;
+			out=0.0;
 			
 
 		}
@@ -94,28 +94,31 @@ struct Bullet : Module {
 			t=0.0;
 			yPos=yInitPos;
 			isRunning=true;
-			
+			out=0.0;
 		}
 		if (isRunning){
 			if (((yPos>10) | (yPos<yInitPos)) & (t>0)){
+				EOCPulse.reset();
 				EOCPulse.trigger(1e-3f);
 				out = EOCPulse.process(args.sampleTime); 
-				outputs[EOC_OUTPUT].setVoltage(10.f*out);
 				isRunning=false;
-				}
-			t+=args.sampleTime;
-			velocity = velocity - (drag)*t;
-			yPos=(velocity*t*std::sin( theta * PI / 180.0)-(0.5*grav*(t*t)))+yInitPos;
-						
-			if (outputs[Y_OUTPUT].isConnected()) {
-			outputs[Y_OUTPUT].setVoltage(yPos);
-			 }
-			if (outputs[INVY_OUTPUT].isConnected()){
-			outputs[INVY_OUTPUT].setVoltage(-1*yPos);
+				yPos=yInitPos;
+							
 			}
-			lights[TRIG_LIGHT].setBrightness(1.0);	
-			outputs[GATE_OUTPUT].setVoltage(10.f);
+				
+				t+=args.sampleTime;
+				velocity = velocity - (drag)*t;
+				yPos=(velocity*t*std::sin( theta * PI / 180.0)-(0.5*grav*(t*t)))+yInitPos;
+				if (outputs[Y_OUTPUT].isConnected()) {
+				outputs[Y_OUTPUT].setVoltage(yPos);
+				 }
+				if (outputs[INVY_OUTPUT].isConnected()){
+				outputs[INVY_OUTPUT].setVoltage(-1*yPos);
+				}
+				lights[TRIG_LIGHT].setBrightness(1.0);	
+				outputs[GATE_OUTPUT].setVoltage(10.f);
 			
+				outputs[EOC_OUTPUT].setVoltage(10.f*out);
 
 		}
 		else{
