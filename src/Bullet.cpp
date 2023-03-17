@@ -61,7 +61,8 @@ struct Bullet : Module {
 
 	void process(const ProcessArgs& args) override {
 
-		if (((edgeDetector.process(inputs[TRIG_INPUT].getVoltage()))) & (!isRunning)){
+		//if (((edgeDetector.process(inputs[TRIG_INPUT].getVoltage()))) & (!isRunning)){
+		if ((inputs[TRIG_INPUT].getVoltage() > 0) & (!isRunning)){	
 			yInitPos=params[INITY_PARAM].getValue();
 			if (inputs[VEL_INPUT].isConnected()){
 				velocity=(inputs[VEL_INPUT].getVoltage())*2;
@@ -79,7 +80,7 @@ struct Bullet : Module {
 			
 
 		}
-		if (trigButtonTrigger.process(params[TRIG_PARAM].getValue()) & !isRunning){
+		if (trigButtonTrigger.process(params[TRIG_PARAM].getValue()) & (!isRunning)){
 			yInitPos=params[INITY_PARAM].getValue();
 			if (inputs[VEL_INPUT].isConnected()){
 				velocity=inputs[VEL_INPUT].getVoltage();
@@ -97,10 +98,10 @@ struct Bullet : Module {
 		}
 		if (isRunning){
 			if (((yPos>10) | (yPos<yInitPos)) & (t>0)){
-				isRunning=false;
 				EOCPulse.trigger(1e-3f);
 				out = EOCPulse.process(args.sampleTime); 
 				outputs[EOC_OUTPUT].setVoltage(10.f*out);
+				isRunning=false;
 				}
 			t+=args.sampleTime;
 			velocity = velocity - (drag)*t;
