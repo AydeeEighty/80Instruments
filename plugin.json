@@ -116,6 +116,14 @@
       "tags": [
         "Physical modeling"
       ]
+    },
+    {
+      "slug": "Klok2",
+      "name": "Klok2",
+      "description": "A clock with probabilty",
+      "tags": [
+        "Clock generator"
+      ]
     }
-   ]
+  ]
 }
